@@ -18,7 +18,25 @@ main{max-width:none;padding:0 clamp(14px,3vw,48px) 32px}.tools{padding:9px 0;bac
 #editor{border:0;margin:0;background:transparent;padding:16px;display:grid;grid-template-columns:1fr;gap:9px}#editor strong{font:700 20px SimSun,serif;border-bottom:1px solid var(--archive-rule);padding-bottom:10px}#editor label{display:grid;gap:3px}#editor input:not([type=checkbox]),#editor select,#editor textarea{width:100%;max-width:none;border-radius:0}#editor label:has(input[type=checkbox]){display:flex}#editor button[type=submit]{border-radius:0}#editor[hidden]{display:none}#editor [hidden]{display:none}
 @media(max-width:730px){.archive-layout:has(#trace-result:not([hidden])),.archive-layout:has(#editor:not([hidden])){grid-template-columns:minmax(0,1fr)}.archive-panel{border-left:0;border-top:1px solid var(--archive-rule)}.archive-layout .sheet{min-height:350px;max-height:64vh}}
 .book-entry{min-height:100svh;display:grid;place-items:center;overflow:hidden;position:relative;background:radial-gradient(ellipse at 52% 43%,#fcf6e5 0%,#e8dfca 60%,#c7baa0 100%);perspective:1200px}.book-entry:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(97deg,#53442a05 0 1px,transparent 1px 6px)}.book{display:block;position:relative;width:min(64vw,360px);aspect-ratio:.74;padding:0;border:0;background:#efe3c3;transform-style:preserve-3d;border-radius:5px 11px 11px 5px;box-shadow:18px 27px 60px #43361c50,7px 5px 0 #b09e7e,11px 9px 0 #dacba7;transform:rotate(-7deg);animation:arrive 900ms cubic-bezier(.18,.75,.25,1) both}.book:hover{background:#efe3c3}.book-cover,.book-leaf{position:absolute;inset:0;display:grid;place-items:center;border-radius:inherit}.book-cover{z-index:1;background:repeating-linear-gradient(0deg,#ffffff06 0 1px,transparent 1px 4px),linear-gradient(105deg,#11272d 0%,#26484d 18%,#1a363d 100%);transform-origin:left center;transition:transform 900ms cubic-bezier(.35,.05,.21,1);backface-visibility:hidden;box-shadow:inset 11px 0 #101f275c,inset 14px 0 #c8ad692a}.book-cover:before{content:"";position:absolute;inset:17px;border:1px solid #b99c5d88;border-radius:2px}.book-title{writing-mode:vertical-rl;font:700 clamp(30px,6vw,58px)/1.35 "Songti SC",SimSun,serif;letter-spacing:.22em;padding:20px 11px;background:#f0e5c5;color:#263b39;box-shadow:3px 3px 9px #06191b66}.book-leaf{background:repeating-linear-gradient(90deg,#f5ecd6 0 38px,#bcaa8233 39px,#f5ecd6 40px);font:25px SimSun,serif;color:#435247}.book-leaf span{writing-mode:vertical-rl;letter-spacing:.25em}.entry-label{position:absolute;top:calc(100% + 24px);left:0;right:0;color:#31423d;text-align:center;transform:rotate(7deg);font-size:15px;letter-spacing:.16em}.book-entry.opening .book-cover{transform:rotateY(-165deg)}.book-entry.opening{animation:leave 1s ease both}.book-entry[hidden],#reading[hidden]{display:none}#reading.arrive{animation:reader-in .52s ease both}.ink-in .person,.ink-in .wire,.ink-in .generation{animation:ink-in .45s ease both;animation-delay:calc(var(--tier,0)*105ms)}#return-cover{margin-left:auto;margin-right:10px;background:transparent;color:var(--archive-ink)}@keyframes arrive{from{opacity:0;transform:translateY(36px) rotate(-13deg) scale(.93)}to{opacity:1;transform:rotate(-7deg)}}@keyframes leave{0%,66%{opacity:1}100%{opacity:0}}@keyframes reader-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}@keyframes ink-in{from{opacity:0;filter:blur(2px)}to{opacity:1;filter:none}}@media(prefers-reduced-motion:reduce){.book,.book-cover,.book-entry.opening,#reading.arrive,.ink-in .person,.ink-in .wire,.ink-in .generation{animation:none;transition:none}}
-.particle-guide{fill:none;stroke:#2c779a;stroke-width:2;opacity:.35}.trace-particle{fill:#2789b1;opacity:.85}.trace-particle.bright{fill:#146987;filter:drop-shadow(0 0 3px #67bed8)}@media(prefers-reduced-motion:reduce){.particle-guide{opacity:1}}</style>
+.particle-guide{fill:none;stroke:#2c779a;stroke-width:2;opacity:.35}.trace-particle{fill:#2789b1;opacity:.85}.trace-particle.bright{fill:#146987;filter:drop-shadow(0 0 3px #67bed8)}@media(prefers-reduced-motion:reduce){.particle-guide{opacity:1}}
+@media(max-width:700px){header{flex-wrap:wrap;gap:8px;padding:12px 14px}header h1{font-size:27px;letter-spacing:.06em}header button{font-size:13px;padding:5px 10px}#save-file,#save-copy{display:none}}
+#m-tree{display:none;padding:6px 4px 56px;color:#17374a;font:15px/1.55 "Microsoft YaHei",sans-serif}
+#m-tree .m-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 2px 12px;border-bottom:1px solid #c7c3b3;margin-bottom:6px}
+#m-tree .m-hint{font-size:12px;color:#7d8984}
+#m-tree .m-switch{font-size:12px;color:#17374a;background:none;border:1px solid #a7afa9;border-radius:3px;padding:4px 9px}
+#m-tree .m-node{margin:0 0 0 12px;padding-left:11px;border-left:1px dashed #cfc9b6}
+#m-tree .m-node.m-root{margin-left:0;padding-left:0;border-left:0}
+#m-tree details>summary{list-style:none;display:flex;align-items:baseline;gap:8px;padding:8px 0;cursor:pointer}
+#m-tree details>summary::-webkit-details-marker{display:none}
+#m-tree summary::after{content:"›";margin-left:auto;color:#9aa49e;font-size:16px;transition:transform .15s}
+#m-tree details[open]>summary::after{transform:rotate(90deg)}
+#m-tree .m-name{font:700 22px/1.35 KaiTi,STKaiti,SimSun,serif}
+#m-tree .m-dead>.m-name,#m-tree .m-dead .m-name{border:1px solid #666456;padding:0 7px;border-radius:2px}
+#m-tree .m-meta{font-size:12px;color:#8a948f}
+#m-tree .m-count{font-size:11px;color:#5d6b70;background:#eee9db;border-radius:10px;padding:1px 8px}
+#m-tree .m-leaf{display:flex;align-items:baseline;gap:8px;padding:8px 0 8px 18px;flex-wrap:wrap}
+#m-tree .m-note{font-size:12px;color:#415867;flex-basis:100%}
+</style>
 <section id="book-entry" class="book-entry" aria-label="谢氏族谱封面"><button type="button" class="book" id="open-book" aria-label="打开谢氏族谱"><span class="book-leaf" aria-hidden="true"><span>谢顺荣</span></span><span class="book-cover" aria-hidden="true"><span class="book-title">谢氏族谱</span></span><span class="entry-label">打开族谱</span></button></section>
 <div id="reading" hidden><header><h1>谢氏族谱</h1><button type="button" id="return-cover">返回封面</button><button type="button" id="save-file">保存回原文件</button><button type="button" id="save-copy">下载族谱</button></header>
 <main><div class="tools"><button id="add-member" type="button">补充成员</button><span id="sync-status" role="status"></span><button id="fit">全谱缩览</button><button id="normal">原尺寸</button><button id="trace" type="button" aria-pressed="false">亲缘追溯</button><output id="zoom-value" aria-label="缩放比例">100%</output><span class="zoom-help">Ctrl＋滚轮缩放</span></div><div class="archive-layout">
@@ -32,7 +50,7 @@ main{max-width:none;padding:0 clamp(14px,3vw,48px) 32px}.tools{padding:9px 0;bac
 <label><input id="deceased" type="checkbox"> 已故</label>
 <button type="submit">保存并下载</button><button type="button" id="delete-member">删除成员</button><button type="button" id="confirm-delete" hidden>确认删除</button><button type="button" id="cancel-delete" hidden>取消删除</button><button type="button" id="download">下载续谱网页</button>
 <p id="feedback" role="status">排行从左至右排列。</p></form>
-</aside></div></main></div>
+</aside></div></main><section id="m-tree" aria-label="手机版族谱"><div class="m-top"><span class="m-hint">横排 · 点名字展开支系 · 方框为已故</span><button id="m-switch" class="m-switch" type="button">看谱图</button></div></section></div>
 <script>
 const original=[["P001", "", "谢顺荣", "", "", true], ["P002", "P001", "春庆", "", ""], ["P003", "P002", "年姑", "", ""], ["P004", "P003", "名家", "", "", true], ["P005", "P003", "名江", "", ""], ["P006", "P003", "名深", "", ""], ["P007", "P003", "名宝", "", ""], ["P008", "P003", "名玉", "", ""], ["P009", "P003", "名金", "", "", true], ["P010", "P003", "粉娟", "", ""], ["P011", "P003", "婵娟", "", ""], ["P012", "P003", "杏娟", "", "", true], ["P013", "P003", "若娟", "", ""], ["P014", "P003", "瑞娟", "", ""], ["P016", "P015", "家河", "", "", true], ["P017", "P015", "家贤", "", ""], ["P018", "P015", "耀娟", "", ""], ["P019", "P015", "兰娟", "", ""], ["P020", "P015", "惠娟", "", ""], ["P015", "P002", "阿元／清有", "", "", true], ["P021", "P002", "银花", "", ""], ["P022", "P021", "益利", "", ""], ["missing", "P001", "二老伯", "", "童年领养，生平不明", true], ["P023", "P001", "芝庆", "", ""], ["P024", "P023", "坤松", "", ""], ["P025", "P024", "名发", "", ""], ["P026", "P024", "名财", "", ""], ["P027", "P024", "名桐", "", ""], ["P028", "P024", "婉枝", "", ""], ["P029", "P024", "惠枝", "", ""], ["P030", "P024", "銮枝", "", ""], ["P031", "P024", "銮香", "", ""], ["P032", "P023", "阿花", "", ""], ["P033", "P032", "佑加", "", ""], ["P034", "P032", "佑生", "", ""], ["P035", "P032", "妙兰", "", ""], ["P036", "P001", "春合", "", ""], ["P037", "P036", "坤林", "", ""], ["P038", "P037", "玉梅", "大姐", "", true], ["P075", "P037", "杏梅", "二姐", "", true], ["P039", "P037", "娥妆", "", ""], ["P040", "P037", "娥貂", "", "", true], ["P041", "P037", "娥清", "", ""], ["P042", "P037", "玉貂", "", ""], ["P043", "P036", "孝林", "", ""], ["P044", "P043", "玉波", "", ""], ["P045", "P043", "玉财", "", ""], ["P046", "P043", "玉城", "", ""], ["P047", "P043", "玉妆", "", ""], ["P048", "P043", "玉粉", "", ""], ["P050", "P049", "名波", "", ""], ["P051", "P049", "维波", "", ""], ["P052", "P049", "维通", "", ""], ["P053", "P049", "粉兰", "", ""], ["P049", "P036", "发林", "", "", true], ["P054", "P036", "碧花", "", ""], ["P055", "P001", "春山", "", ""], ["P056", "P055", "有茂", "", ""], ["P057", "P056", "龙树", "", ""], ["P058", "P056", "龙波", "", ""], ["P059", "P056", "维龙", "", ""], ["P060", "P056", "如意", "", ""], ["P061", "P056", "如貂", "", ""], ["P062", "P055", "木南姑", "", ""], ["P063", "P001", "阿爱", "", ""], ["P064", "P063", "沈镇泉", "", ""], ["P065", "P064", "锡升", "", ""], ["P066", "P064", "祝升", "", ""], ["P067", "P064", "祝秋", "", ""], ["P068", "P064", "锡俊", "", ""], ["P069", "P064", "秋婵", "", ""], ["P070", "P064", "秋惜", "", ""], ["P071", "P064", "秋云", "", ""], ["P072", "P064", "祥云", "", ""], ["P073", "P001", "亚老姑", "", ""], ["P074", "P001", "小老姑", "", ""], ["bf7e3b70-4188-4f5a-bdd9-664e746e9864", "P007", "振豪", "", ""], ["99c4b494-2226-4acb-9662-9c30aed7e1d1", "P007", "振华", "", ""], ["7ab97a61-ba6e-415c-8dd8-4407f096ef17", "P007", "振复", "", ""], ["2828e28f-fd05-4cd5-962d-00c7722c149d", "bf7e3b70-4188-4f5a-bdd9-664e746e9864", "长峰", "", ""], ["fad8ad52-9c6e-466c-90d9-9cc4e7f1c038", "bf7e3b70-4188-4f5a-bdd9-664e746e9864", "瀞亿", "", "", false], ["95b95ede-978b-4d97-8928-0d9d6aa84631", "99c4b494-2226-4acb-9662-9c30aed7e1d1", "欣妤", "", "", false], ["1319fd04-2168-49fb-aa4d-2c398928df0a", "99c4b494-2226-4acb-9662-9c30aed7e1d1", "欣言", "", "", false], ["30720302-2aeb-4b33-a4c4-cc13eac3b096", "P041", "舜端", "", "", false], ["6fdb127c-28e4-4b02-a88c-62664a57c5e4", "P041", "舜根", "", "", false], ["b57511a5-2c8a-4ed2-9368-169c59c590d0", "P041", "舜莹", "", "", false], ["2ececf84-683f-4bfe-81b7-d015d336e759", "30720302-2aeb-4b33-a4c4-cc13eac3b096", "庆生", "", "", false], ["efe907f6-2c79-4809-af57-429a257f26b9", "30720302-2aeb-4b33-a4c4-cc13eac3b096", "博杭", "", "", false], ["66e296f8-ab26-49ec-ad08-f0da022a9549", "6fdb127c-28e4-4b02-a88c-62664a57c5e4", "炼杰", "", "", false], ["f863c379-3bb4-46c8-ad9d-2d382eb23226", "6fdb127c-28e4-4b02-a88c-62664a57c5e4", "练达", "", "", false], ["c8380c39-a922-4b9f-921b-f8bf8d9a416b", "b57511a5-2c8a-4ed2-9368-169c59c590d0", "自航", "", "", false]];
 const legacyKey='xie-genealogy-edit:'+JSON.stringify(original);
@@ -456,4 +474,49 @@ openBook.onclick=async()=>{
  },reduced?0:920);
 };
 get('return-cover').onclick=()=>{reading.hidden=true;reading.classList.remove('arrive');entry.hidden=false;openBook.focus();};
+</script>
+<script>
+(function(){
+ try{
+  var mq=window.matchMedia('(max-width:700px)');
+  if(!mq.matches)return;
+  var kidsOf={},gen={};
+  rows.forEach(function(r){(kidsOf[r[1]]=kidsOf[r[1]]||[]).push(r);});
+  (function walk(id,d){gen[id]=d;(kidsOf[id]||[]).forEach(function(k){walk(k[0],d+1);});})('P001',1);
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+  function build(r,d){
+   var kids=kidsOf[r[0]]||[],dead=false;
+   try{dead=!!isDeceased(r);}catch(e){dead=false;}
+   var wrap=el('div','m-node'+(d===1?' m-root':'')),head;
+   if(kids.length){
+    var det=el('details');det.open=d<2;
+    var sum=el('summary',dead?'m-dead':'');
+    sum.appendChild(el('span','m-name',r[2]));
+    sum.appendChild(el('span','m-meta','第'+d+'代'));
+    sum.appendChild(el('span','m-count',kids.length+' 人'));
+    det.appendChild(sum);
+    var box=el('div');
+    kids.forEach(function(k){box.appendChild(build(k,d+1));});
+    det.appendChild(box);head=det;
+   }else{
+    head=el('div','m-leaf'+(dead?' m-dead':''));
+    head.appendChild(el('span','m-name',r[2]));
+    head.appendChild(el('span','m-meta','第'+d+'代'));
+   }
+   if(r[4])head.appendChild(el('span','m-note',r[4]));
+   wrap.appendChild(head);return wrap;
+  }
+  var host=document.getElementById('m-tree');
+  var rootRow=rows.filter(function(r){return r[0]==='P001';})[0];
+  if(rootRow)host.appendChild(build(rootRow,1));
+  document.querySelector('main').style.display='none';
+  host.style.display='block';
+  var sw=document.getElementById('m-switch');
+  if(sw)sw.onclick=function(){
+   host.style.display='none';
+   document.querySelector('main').style.display='';
+   try{draw();fitChart();}catch(e){}
+  };
+ }catch(e){}
+})();
 </script></html>
