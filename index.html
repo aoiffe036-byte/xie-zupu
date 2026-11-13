@@ -36,6 +36,14 @@ main{max-width:none;padding:0 clamp(14px,3vw,48px) 32px}.tools{padding:9px 0;bac
 #m-tree .m-count{font-size:11px;color:#5d6b70;background:#eee9db;border-radius:10px;padding:1px 8px}
 #m-tree .m-leaf{display:flex;align-items:baseline;gap:8px;padding:8px 0 8px 18px;flex-wrap:wrap}
 #m-tree .m-note{font-size:12px;color:#415867;flex-basis:100%}
+#m-tree{padding:0 0 60px}
+#m-tree .m-node{margin:0 0 0 14px;padding-left:12px;border-left:1px solid #e2dbc8}
+#m-tree .m-node.m-root{margin-left:0;padding-left:0;border-left:0}
+#m-tree details>summary{padding:12px 10px;border-bottom:1px solid #ece7d8;background:#fffdf6;border-radius:3px;margin-bottom:1px}
+#m-tree .m-leaf{padding:12px 10px 12px 30px;border-bottom:1px solid #f2edde;background:#fffdf6;display:flex;align-items:baseline;gap:10px;margin-bottom:1px}
+#m-tree .m-name{font-size:25px}
+#m-tree .m-count{background:#e7e1cf;color:#3f4f56}
+#m-tree .m-top{background:#f6f3e8;padding:10px 12px;margin:0 -4px 10px;border:0}
 </style>
 <section id="book-entry" class="book-entry" aria-label="谢氏族谱封面"><button type="button" class="book" id="open-book" aria-label="打开谢氏族谱"><span class="book-leaf" aria-hidden="true"><span>谢顺荣</span></span><span class="book-cover" aria-hidden="true"><span class="book-title">谢氏族谱</span></span><span class="entry-label">打开族谱</span></button></section>
 <div id="reading" hidden><header><h1>谢氏族谱</h1><button type="button" id="return-cover">返回封面</button><button type="button" id="save-file">保存回原文件</button><button type="button" id="save-copy">下载族谱</button></header>
@@ -478,8 +486,9 @@ get('return-cover').onclick=()=>{reading.hidden=true;reading.classList.remove('a
 <script>
 (function(){
  try{
-  var mq=window.matchMedia('(max-width:700px)');
-  if(!mq.matches)return;
+  var ua=navigator.userAgent||'';
+  var isPhone=/Android|iPhone|iPod|Mobile|MicroMessenger/i.test(ua)||window.innerWidth<=820;
+  if(!isPhone)return;
   var kidsOf={},gen={};
   rows.forEach(function(r){(kidsOf[r[1]]=kidsOf[r[1]]||[]).push(r);});
   (function walk(id,d){gen[id]=d;(kidsOf[id]||[]).forEach(function(k){walk(k[0],d+1);});})('P001',1);
