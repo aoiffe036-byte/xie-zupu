@@ -1,6 +1,6 @@
 <!doctype html><html lang="zh-Hans" data-offline><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>谢氏族谱</title><meta name="description" content="谢氏家族数字族谱：横向谱图，可点开成员查看备注、续谱登记与亲缘追溯。"><meta property="og:type" content="website"><meta property="og:title" content="谢氏族谱"><meta property="og:description" content="谢氏家族数字族谱，点击成员查看备注、追溯亲缘关系。"><meta property="og:locale" content="zh_CN"><link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%2317374a%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-size=%2738%27 text-anchor=%27middle%27 fill=%27%23f6f4ec%27 font-family=%27SimSun%27%3E%E8%B0%A2%3C/text%3E%3C/svg%3E">
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f2ece0;color:#262923;font:15px/1.6 "Microsoft YaHei",sans-serif}header,main{max-width:1440px;margin:auto;padding:20px clamp(12px,3vw,40px)}header{padding-bottom:4px}h1{font:700 39px SimSun,serif;margin:8px 0 14px}header p{margin:0;max-width:900px;color:#60574b}.tools{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}button{font:inherit;padding:5px 12px;border:1px solid #aa9c82;background:#faf6eb;color:#292c26;cursor:pointer}button:hover{background:#e8decd}.sheet{overflow:auto;border:1px solid #ad9c82;background:#fffcf1;min-height:240px}.space{position:relative}.chart{position:absolute;transform-origin:0 0}.wire{position:absolute;background:#666456;pointer-events:none}.person{position:absolute;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;background:#fffcf1;color:#263e4c;width:37px;font:700 21px/1.28 KaiTi,STKaiti,SimSun,serif;writing-mode:vertical-rl;letter-spacing:.12em}.boxed{border:1px solid #666456}.root{writing-mode:horizontal-tb;width:150px;font-size:23px}.pending{border:1px dashed #666456}.notes{color:#60574b;font-size:14px}.notes p{margin:7px 0}.notes strong{color:#382f26}
+*{box-sizing:border-box}body{margin:0;background:#f2ece0;color:#262923;font:15px/1.6 "Microsoft YaHei",sans-serif}header,main{max-width:1440px;margin:auto;padding:20px clamp(12px,3vw,40px)}header{padding-bottom:4px}h1{font:700 39px SimSun,serif;margin:8px 0 14px}header p{margin:0;max-width:900px;color:#60574b}.tools{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}button{font:inherit;padding:5px 12px;border:1px solid #aa9c82;background:#faf6eb;color:#292c26;cursor:pointer}button:hover{background:#e8decd}.sheet{overflow:auto;border:1px solid #ad9c82;background:#fffcf1;min-height:240px}.space{position:relative}.chart{position:absolute;transform-origin:0 0}.wire{position:absolute;background:#666456;pointer-events:none}.person{position:absolute;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;background:#fffcf1;color:#263e4c;min-width:58px;max-width:86px;padding:3px 8px;font:700 19px/1.22 KaiTi,STKaiti,SimSun,serif;writing-mode:horizontal-tb;letter-spacing:.02em;white-space:normal;text-align:center;border-radius:2px}.boxed{border:1px solid #666456}.root{writing-mode:horizontal-tb;width:auto;min-width:150px;max-width:none;font-size:21px;white-space:nowrap;padding:3px 12px}.pending{border:1px dashed #666456}.notes{color:#60574b;font-size:14px}.notes p{margin:7px 0}.notes strong{color:#382f26}
 .generation{position:absolute;left:7px;color:#263e4c;font-size:13px;white-space:nowrap}#editor{margin:18px 0;padding:13px;border:1px solid #ad9c82;display:flex;gap:9px;align-items:center;flex-wrap:wrap}#editor strong,#editor p{width:100%;margin:0}#editor input,#editor select{font:inherit;max-width:175px;padding:4px}#editor [hidden]{display:none}.person{cursor:pointer}.person:hover{outline:1px solid #666456}
 .member-note{position:absolute;width:20px;max-height:105px;writing-mode:vertical-rl;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:12px/1.4 "Microsoft YaHei",sans-serif;padding:2px;border:0;color:#415867;background:#fffcf1}.member-note:hover{background:#e8decd}#member-note{font:inherit;width:220px;max-width:100%;vertical-align:middle}#editor[hidden]{display:none}.branch-toggle{position:absolute;transform:translateX(-50%);font-size:12px;line-height:1.2;padding:2px 4px;white-space:nowrap} .person:focus-visible{outline:1px solid #666456}.trace-overlay{position:absolute;inset:0;pointer-events:none}.trace-overlay polyline{fill:none;stroke:#287eb2;stroke-width:5;stroke-dasharray:14 8;animation:trace-flow .65s linear infinite}.person.traced{color:#125780;text-decoration:underline;text-underline-offset:3px}@keyframes trace-flow{to{stroke-dashoffset:-22}}@media(prefers-reduced-motion:reduce){.trace-overlay polyline{animation:none}}:root{--ink:#213b4c;--muted:#53636a;--paper:#fffcf2;--rule:#c7c3b3;--accent:#234b63}
 body{background:#edeae0;color:var(--ink)}header{max-width:none;background:#223946;color:#fff8e8;border-bottom:1px solid #172c39;padding:23px max(clamp(16px,4vw,56px),calc((100vw - 1328px)/2))}header h1{margin:0;font:700 clamp(28px,4vw,43px)/1.3 "Songti SC",SimSun,serif;letter-spacing:.09em}
@@ -60,10 +60,25 @@ main{max-width:none;padding:0 clamp(14px,3vw,48px) 32px}.tools{padding:9px 0;bac
  .tools{display:none}
  .archive-layout .sheet{height:calc(100dvh - 60px)}
 }
+
+.archive-panel{display:none}
+body.panel-open .archive-panel{display:block}
+body.panel-open .archive-layout{grid-template-columns:minmax(0,1fr) minmax(245px,300px)}
+@media(max-width:900px){
+ body.panel-open .archive-panel{position:fixed;left:0;right:0;bottom:0;max-height:58vh;overflow:auto;z-index:200;border-top:1px solid #a7afa9;background:#f7f5ec;box-shadow:0 -6px 20px #0000001a;padding:10px 12px}
+ body.panel-open .archive-layout{grid-template-columns:minmax(0,1fr)}
+ body.panel-open{padding-bottom:60vh}
+}
+html.rot,html.rot body{overflow:hidden}
+html.rot #reading{position:fixed;top:0;left:0;width:100vh;height:100vw;transform:rotate(90deg) translateY(-100vw);transform-origin:top left;background:#f4f1e8;z-index:900;overflow:auto;display:block}
+html.rot #reading header{padding:6px 12px}
+html.rot #reading h1{font-size:20px}
+html.rot .tools{padding:4px 0;margin:0}
+html.rot .archive-layout .sheet{height:calc(100vw - 112px);max-height:none}
 </style>
 <section id="book-entry" class="book-entry" aria-label="谢氏族谱封面"><button type="button" class="book" id="open-book" aria-label="打开谢氏族谱"><span class="book-leaf" aria-hidden="true"><span>谢顺荣</span></span><span class="book-cover" aria-hidden="true"><span class="book-title">谢氏族谱</span></span><span class="entry-label">打开族谱</span></button></section>
-<div id="reading" hidden><header><h1>谢氏族谱</h1><span id="ver" style="font:11px/1 sans-serif;color:#93a09a;align-self:flex-end;margin-left:6px">v5</span><button type="button" id="return-cover">返回封面</button><button type="button" id="save-file">保存回原文件</button><button type="button" id="save-copy">下载族谱</button></header>
-<main><div class="tools"><button id="add-member" type="button">补充成员</button><span id="sync-status" role="status"></span><button id="fit">全谱缩览</button><button id="normal">原尺寸</button><button id="trace" type="button" aria-pressed="false">亲缘追溯</button><output id="zoom-value" aria-label="缩放比例">100%</output><span class="zoom-help">Ctrl＋滚轮缩放</span></div><div class="archive-layout">
+<div id="reading" hidden><header><h1>谢氏族谱</h1><span id="ver" style="font:11px/1 sans-serif;color:#93a09a;align-self:flex-end;margin-left:6px">v6</span><button type="button" id="return-cover">返回封面</button><button type="button" id="save-file">保存回原文件</button><button type="button" id="save-copy">下载族谱</button></header>
+<main><div class="tools"><button id="add-member" type="button">补充成员</button><span id="sync-status" role="status"></span><button id="fit">全谱缩览</button><button id="rot" type="button">横屏</button><button id="normal">原尺寸</button><button id="trace" type="button" aria-pressed="false">亲缘追溯</button><output id="zoom-value" aria-label="缩放比例">100%</output><span class="zoom-help">Ctrl＋滚轮缩放</span></div><div class="archive-layout">
 <div class="sheet" id="sheet" tabindex="0" aria-label="横向族谱，可左右滚动"><div class="space" id="space"><div class="chart" id="chart"></div></div></div>
 <aside class="archive-panel" aria-label="族谱详情"><div id="trace-result" role="status" hidden></div><form id="editor" hidden><strong>续谱登记</strong>
 <span id="selected-member"></span><button type="button" id="close-editor">关闭登记</button><input type="hidden" id="reference">
@@ -113,7 +128,7 @@ function filter(node,full=false,depth=0){
 }
 filter(root);
 for(const id of records.keys())if(!visible.has(id))records.delete(id);
-const pitch=48,gap=20;
+const pitch=94,gap=14;
 function layout(node,depth,left){
  node.y=28+depth*145;
  const noteWidth=node.note||node.label&&node.label!=="姓名待补录"?24:0;
@@ -124,7 +139,7 @@ function layout(node,depth,left){
  }
  node.width=Math.max(pitch+noteWidth,node.kids.length?right-left-gap:0);
  node.x=node.kids.length?(node.kids[0].x+node.kids.at(-1).x)/2:left+pitch/2;
- node.height=depth===0?41:Math.max(53,[...node.name].length*20+10);
+ node.height=depth===0?44:48;
 }
 layout(root,0,76);
 for(let y=28,depth=1;y<=Math.max(...[...records.values()].map(n=>n.y));y+=145,depth++){
@@ -518,5 +533,23 @@ get('return-cover').onclick=()=>{reading.hidden=true;reading.classList.remove('a
  function onResize(){clearTimeout(t);t=setTimeout(function(){try{if(fit)fitChart();else size(zoom);}catch(e){}},200);}
  window.addEventListener('orientationchange',onResize);
  window.addEventListener('resize',onResize);
+ var rb=document.getElementById('rot');
+ if(rb)rb.onclick=function(){
+  var r=document.documentElement.classList.toggle('rot');
+  rb.textContent=r?'竖屏':'横屏';
+  setTimeout(function(){try{if(fit)fitChart();else size(zoom);}catch(e){}},150);
+ };
+ function syncPanel(){
+  var a=document.getElementById('trace-result'),b=document.getElementById('editor');
+  var open=(a&&!a.hidden)||(b&&!b.hidden);
+  document.body.classList.toggle('panel-open',!!open);
+ }
+ var _a=document.getElementById('trace-result'),_b=document.getElementById('editor');
+ if(window.MutationObserver){
+  if(_a)new MutationObserver(syncPanel).observe(_a,{attributes:true,attributeFilter:['hidden']});
+  if(_b)new MutationObserver(syncPanel).observe(_b,{attributes:true,attributeFilter:['hidden']});
+ }
+ syncPanel();
+
 })();
 </script></html>
