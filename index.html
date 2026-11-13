@@ -44,6 +44,22 @@ main{max-width:none;padding:0 clamp(14px,3vw,48px) 32px}.tools{padding:9px 0;bac
 #m-tree .m-name{font-size:25px}
 #m-tree .m-count{background:#e7e1cf;color:#3f4f56}
 #m-tree .m-top{background:#f6f3e8;padding:10px 12px;margin:0 -4px 10px;border:0}
+
+@media(max-width:900px){
+ header{padding:10px 14px;gap:10px}
+ header h1{font-size:24px;letter-spacing:.05em}
+ header button{font-size:13px;padding:5px 10px}
+ .tools{padding:6px 0;gap:5px}
+ .tools button{font-size:13px;padding:4px 8px}
+ .zoom-help{display:none}
+ .archive-layout .sheet{max-height:none;height:calc(100dvh - 158px);min-height:0}
+}
+@media(orientation:landscape) and (max-height:560px){
+ header{padding:6px 12px}
+ header h1{font-size:18px}
+ .tools{display:none}
+ .archive-layout .sheet{height:calc(100dvh - 60px)}
+}
 </style>
 <section id="book-entry" class="book-entry" aria-label="谢氏族谱封面"><button type="button" class="book" id="open-book" aria-label="打开谢氏族谱"><span class="book-leaf" aria-hidden="true"><span>谢顺荣</span></span><span class="book-cover" aria-hidden="true"><span class="book-title">谢氏族谱</span></span><span class="entry-label">打开族谱</span></button></section>
 <div id="reading" hidden><header><h1>谢氏族谱</h1><button type="button" id="return-cover">返回封面</button><button type="button" id="save-file">保存回原文件</button><button type="button" id="save-copy">下载族谱</button></header>
@@ -483,49 +499,24 @@ openBook.onclick=async()=>{
 };
 get('return-cover').onclick=()=>{reading.hidden=true;reading.classList.remove('arrive');entry.hidden=false;openBook.focus();};
 </script>
+
 <script>
 (function(){
- try{
-  var ua=navigator.userAgent||'';
-  var isPhone=/Android|iPhone|iPod|Mobile|MicroMessenger/i.test(ua)||window.innerWidth<=820;
-  if(!isPhone)return;
-  var kidsOf={},gen={};
-  rows.forEach(function(r){(kidsOf[r[1]]=kidsOf[r[1]]||[]).push(r);});
-  (function walk(id,d){gen[id]=d;(kidsOf[id]||[]).forEach(function(k){walk(k[0],d+1);});})('P001',1);
-  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
-  function build(r,d){
-   var kids=kidsOf[r[0]]||[],dead=false;
-   try{dead=!!isDeceased(r);}catch(e){dead=false;}
-   var wrap=el('div','m-node'+(d===1?' m-root':'')),head;
-   if(kids.length){
-    var det=el('details');det.open=d<2;
-    var sum=el('summary',dead?'m-dead':'');
-    sum.appendChild(el('span','m-name',r[2]));
-    sum.appendChild(el('span','m-meta','第'+d+'代'));
-    sum.appendChild(el('span','m-count',kids.length+' 人'));
-    det.appendChild(sum);
-    var box=el('div');
-    kids.forEach(function(k){box.appendChild(build(k,d+1));});
-    det.appendChild(box);head=det;
-   }else{
-    head=el('div','m-leaf'+(dead?' m-dead':''));
-    head.appendChild(el('span','m-name',r[2]));
-    head.appendChild(el('span','m-meta','第'+d+'代'));
-   }
-   if(r[4])head.appendChild(el('span','m-note',r[4]));
-   wrap.appendChild(head);return wrap;
-  }
-  var host=document.getElementById('m-tree');
-  var rootRow=rows.filter(function(r){return r[0]==='P001';})[0];
-  if(rootRow)host.appendChild(build(rootRow,1));
-  document.querySelector('main').style.display='none';
-  host.style.display='block';
-  var sw=document.getElementById('m-switch');
-  if(sw)sw.onclick=function(){
-   host.style.display='none';
-   document.querySelector('main').style.display='';
-   try{draw();fitChart();}catch(e){}
-  };
- }catch(e){}
+ var ua=navigator.userAgent||'';
+ if(!/Android|iPhone|iPod|Mobile|MicroMessenger/i.test(ua))return;
+ function centerRoot(z){
+  try{
+   fit=false;size(z);
+   var n=records&&records.get?records.get('P001'):null;
+   sheet.scrollLeft=n?Math.max(0,n.x*z-sheet.clientWidth/2):0;
+   sheet.scrollTop=0;
+  }catch(e){}
+ }
+ var ob=document.getElementById('open-book');
+ if(ob){var old=ob.onclick;ob.onclick=function(e){var r=old&&old.call(this,e);setTimeout(function(){centerRoot(0.62);},1150);return r;};}
+ var t=null;
+ function onResize(){clearTimeout(t);t=setTimeout(function(){try{if(fit)fitChart();else size(zoom);}catch(e){}},200);}
+ window.addEventListener('orientationchange',onResize);
+ window.addEventListener('resize',onResize);
 })();
 </script></html>
