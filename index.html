@@ -1,0 +1,459 @@
+﻿<!doctype html><html lang="zh-Hans" data-offline><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>谢氏族谱</title><meta name="description" content="谢氏家族数字族谱：横向谱图，可点开成员查看备注、续谱登记与亲缘追溯。"><meta property="og:type" content="website"><meta property="og:title" content="谢氏族谱"><meta property="og:description" content="谢氏家族数字族谱，点击成员查看备注、追溯亲缘关系。"><meta property="og:locale" content="zh_CN"><link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 fill=%27%2317374a%27/%3E%3Ctext x=%2732%27 y=%2746%27 font-size=%2738%27 text-anchor=%27middle%27 fill=%27%23f6f4ec%27 font-family=%27SimSun%27%3E%E8%B0%A2%3C/text%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f2ece0;color:#262923;font:15px/1.6 "Microsoft YaHei",sans-serif}header,main{max-width:1440px;margin:auto;padding:20px clamp(12px,3vw,40px)}header{padding-bottom:4px}h1{font:700 39px SimSun,serif;margin:8px 0 14px}header p{margin:0;max-width:900px;color:#60574b}.tools{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}button{font:inherit;padding:5px 12px;border:1px solid #aa9c82;background:#faf6eb;color:#292c26;cursor:pointer}button:hover{background:#e8decd}.sheet{overflow:auto;border:1px solid #ad9c82;background:#fffcf1;min-height:240px}.space{position:relative}.chart{position:absolute;transform-origin:0 0}.wire{position:absolute;background:#666456;pointer-events:none}.person{position:absolute;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;background:#fffcf1;color:#263e4c;width:34px;font:700 19px/1.2 KaiTi,STKaiti,SimSun,serif;writing-mode:vertical-rl;letter-spacing:.12em}.boxed{border:1px solid #666456}.root{writing-mode:horizontal-tb;width:150px;font-size:23px}.pending{border:1px dashed #666456}.notes{color:#60574b;font-size:14px}.notes p{margin:7px 0}.notes strong{color:#382f26}
+.generation{position:absolute;left:7px;color:#263e4c;font-size:13px;white-space:nowrap}#editor{margin:18px 0;padding:13px;border:1px solid #ad9c82;display:flex;gap:9px;align-items:center;flex-wrap:wrap}#editor strong,#editor p{width:100%;margin:0}#editor input,#editor select{font:inherit;max-width:175px;padding:4px}#editor [hidden]{display:none}.person{cursor:pointer}.person:hover{outline:1px solid #666456}
+.member-note{position:absolute;width:20px;max-height:105px;writing-mode:vertical-rl;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:12px/1.4 "Microsoft YaHei",sans-serif;padding:2px;border:0;color:#415867;background:#fffcf1}.member-note:hover{background:#e8decd}#member-note{font:inherit;width:220px;max-width:100%;vertical-align:middle}#editor[hidden]{display:none}.branch-toggle{position:absolute;transform:translateX(-50%);font-size:12px;line-height:1.2;padding:2px 4px;white-space:nowrap} .person:focus-visible{outline:1px solid #666456}.trace-overlay{position:absolute;inset:0;pointer-events:none}.trace-overlay polyline{fill:none;stroke:#287eb2;stroke-width:5;stroke-dasharray:14 8;animation:trace-flow .65s linear infinite}.person.traced{color:#125780;text-decoration:underline;text-underline-offset:3px}@keyframes trace-flow{to{stroke-dashoffset:-22}}@media(prefers-reduced-motion:reduce){.trace-overlay polyline{animation:none}}:root{--ink:#213b4c;--muted:#53636a;--paper:#fffcf2;--rule:#c7c3b3;--accent:#234b63}
+body{background:#edeae0;color:var(--ink)}header{max-width:none;background:#223946;color:#fff8e8;border-bottom:1px solid #172c39;padding:23px max(clamp(16px,4vw,56px),calc((100vw - 1328px)/2))}header h1{margin:0;font:700 clamp(28px,4vw,43px)/1.3 "Songti SC",SimSun,serif;letter-spacing:.09em}
+main{padding-block:25px 42px}.tools{display:flex;align-items:center;gap:7px;margin:0;padding:10px 12px;background:#f7f5ec;border:1px solid var(--rule);border-bottom:0}.tools button,#editor button{border-color:#adb8ba;background:#fffdf5;color:var(--ink);border-radius:4px;padding:6px 11px}.tools button:hover,#editor button:hover{background:#e3edf0}.tools #trace[aria-pressed=true],#editor button[type=submit]{color:#fff;background:var(--accent);border-color:var(--accent)}
+.tools output{margin-left:auto;color:var(--muted);min-width:4ch;text-align:right;font-variant-numeric:tabular-nums}.zoom-help{color:var(--muted);font-size:13px}.sheet{border-color:var(--rule);background:var(--paper);max-height:72vh;overscroll-behavior:contain;scrollbar-color:#a7aca6 var(--paper);box-shadow:0 8px 22px #27383d0b}.sheet:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#trace-result{margin:0;padding:10px 14px;background:#e6eef0;border:1px solid var(--rule);border-bottom:0;color:var(--ink)}#editor{background:#faf8ee;border-color:var(--rule);padding:16px;gap:10px;color:var(--ink)}#editor label{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap}#editor input:not([type=checkbox]),#editor select,#editor textarea{background:#fffdf6;color:var(--ink);border:1px solid #aab5b6;border-radius:4px;padding:5px 7px}#editor #selected-member{font-weight:600}#editor #feedback{font-size:13px;color:var(--muted)}button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.branch-toggle{border-radius:3px;border-color:#c3bead;color:#385363}
+@media(max-width:540px){.tools{padding:8px;gap:5px}.tools button{padding:4px 6px}.zoom-help{display:none}.sheet{max-height:65vh}}
+:root{--archive-paper:#f6f4ec;--archive-ink:#17374a;--archive-rule:#a7afa9;--archive-white:#fffdf6}
+body{background:var(--archive-paper);color:var(--archive-ink);font-family:"Microsoft YaHei",sans-serif}header{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:none;background:transparent;color:var(--archive-ink);border-bottom:1px solid var(--archive-rule);padding:17px clamp(14px,3vw,48px)}header h1{margin:0;font:700 clamp(29px,4vw,48px)/1.12 "Songti SC",SimSun,serif;letter-spacing:.10em}header button{padding:7px 13px;border:1px solid var(--archive-ink);background:var(--archive-ink);color:white;border-radius:0}header button:hover{background:#2d5266}
+main{max-width:none;padding:0 clamp(14px,3vw,48px) 32px}.tools{padding:9px 0;background:transparent;border:0;margin:0}.tools button,#editor button{border-radius:0}.tools button{background:transparent;border:1px solid var(--archive-rule)}.tools #trace[aria-pressed=true]{background:var(--archive-ink)}
+.archive-layout{display:grid;grid-template-columns:minmax(0,1fr);border:1px solid var(--archive-rule);background:var(--archive-white)}.archive-layout:has(#trace-result:not([hidden])),.archive-layout:has(#editor:not([hidden])){grid-template-columns:minmax(0,1fr) minmax(245px,300px)}
+.archive-layout .sheet{min-width:0;min-height:clamp(390px,68vh,820px);max-height:76vh;box-shadow:none;border:0;background:var(--archive-white)}.wire{background:#85958f}.person{background:var(--archive-white)}.member-note{background:var(--archive-white)}.branch-toggle{border:0;border-bottom:1px solid #b0b8b2;background:var(--archive-white);border-radius:0}
+.archive-panel{min-width:0;border-left:1px solid var(--archive-rule);background:#f2f1e8}.archive-panel:has(#trace-result[hidden]):has(#editor[hidden]){display:none}
+#trace-result{margin:0;background:transparent;border:0;padding:18px;line-height:1.85}#trace-result strong{display:block;padding-bottom:9px;margin-bottom:9px;border-bottom:1px solid var(--archive-rule);font-size:18px;font-family:SimSun,serif}#trace-result p{margin:8px 0}
+#editor{border:0;margin:0;background:transparent;padding:16px;display:grid;grid-template-columns:1fr;gap:9px}#editor strong{font:700 20px SimSun,serif;border-bottom:1px solid var(--archive-rule);padding-bottom:10px}#editor label{display:grid;gap:3px}#editor input:not([type=checkbox]),#editor select,#editor textarea{width:100%;max-width:none;border-radius:0}#editor label:has(input[type=checkbox]){display:flex}#editor button[type=submit]{border-radius:0}#editor[hidden]{display:none}#editor [hidden]{display:none}
+@media(max-width:730px){.archive-layout:has(#trace-result:not([hidden])),.archive-layout:has(#editor:not([hidden])){grid-template-columns:minmax(0,1fr)}.archive-panel{border-left:0;border-top:1px solid var(--archive-rule)}.archive-layout .sheet{min-height:350px;max-height:64vh}}
+.book-entry{min-height:100svh;display:grid;place-items:center;overflow:hidden;position:relative;background:radial-gradient(ellipse at 52% 43%,#fcf6e5 0%,#e8dfca 60%,#c7baa0 100%);perspective:1200px}.book-entry:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(97deg,#53442a05 0 1px,transparent 1px 6px)}.book{display:block;position:relative;width:min(64vw,360px);aspect-ratio:.74;padding:0;border:0;background:#efe3c3;transform-style:preserve-3d;border-radius:5px 11px 11px 5px;box-shadow:18px 27px 60px #43361c50,7px 5px 0 #b09e7e,11px 9px 0 #dacba7;transform:rotate(-7deg);animation:arrive 900ms cubic-bezier(.18,.75,.25,1) both}.book:hover{background:#efe3c3}.book-cover,.book-leaf{position:absolute;inset:0;display:grid;place-items:center;border-radius:inherit}.book-cover{z-index:1;background:repeating-linear-gradient(0deg,#ffffff06 0 1px,transparent 1px 4px),linear-gradient(105deg,#11272d 0%,#26484d 18%,#1a363d 100%);transform-origin:left center;transition:transform 900ms cubic-bezier(.35,.05,.21,1);backface-visibility:hidden;box-shadow:inset 11px 0 #101f275c,inset 14px 0 #c8ad692a}.book-cover:before{content:"";position:absolute;inset:17px;border:1px solid #b99c5d88;border-radius:2px}.book-title{writing-mode:vertical-rl;font:700 clamp(30px,6vw,58px)/1.35 "Songti SC",SimSun,serif;letter-spacing:.22em;padding:20px 11px;background:#f0e5c5;color:#263b39;box-shadow:3px 3px 9px #06191b66}.book-leaf{background:repeating-linear-gradient(90deg,#f5ecd6 0 38px,#bcaa8233 39px,#f5ecd6 40px);font:25px SimSun,serif;color:#435247}.book-leaf span{writing-mode:vertical-rl;letter-spacing:.25em}.entry-label{position:absolute;top:calc(100% + 24px);left:0;right:0;color:#31423d;text-align:center;transform:rotate(7deg);font-size:15px;letter-spacing:.16em}.book-entry.opening .book-cover{transform:rotateY(-165deg)}.book-entry.opening{animation:leave 1s ease both}.book-entry[hidden],#reading[hidden]{display:none}#reading.arrive{animation:reader-in .52s ease both}.ink-in .person,.ink-in .wire,.ink-in .generation{animation:ink-in .45s ease both;animation-delay:calc(var(--tier,0)*105ms)}#return-cover{margin-left:auto;margin-right:10px;background:transparent;color:var(--archive-ink)}@keyframes arrive{from{opacity:0;transform:translateY(36px) rotate(-13deg) scale(.93)}to{opacity:1;transform:rotate(-7deg)}}@keyframes leave{0%,66%{opacity:1}100%{opacity:0}}@keyframes reader-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}@keyframes ink-in{from{opacity:0;filter:blur(2px)}to{opacity:1;filter:none}}@media(prefers-reduced-motion:reduce){.book,.book-cover,.book-entry.opening,#reading.arrive,.ink-in .person,.ink-in .wire,.ink-in .generation{animation:none;transition:none}}
+.particle-guide{fill:none;stroke:#2c779a;stroke-width:2;opacity:.35}.trace-particle{fill:#2789b1;opacity:.85}.trace-particle.bright{fill:#146987;filter:drop-shadow(0 0 3px #67bed8)}@media(prefers-reduced-motion:reduce){.particle-guide{opacity:1}}</style>
+<section id="book-entry" class="book-entry" aria-label="谢氏族谱封面"><button type="button" class="book" id="open-book" aria-label="打开谢氏族谱"><span class="book-leaf" aria-hidden="true"><span>谢顺荣</span></span><span class="book-cover" aria-hidden="true"><span class="book-title">谢氏族谱</span></span><span class="entry-label">打开族谱</span></button></section>
+<div id="reading" hidden><header><h1>谢氏族谱</h1><button type="button" id="return-cover">返回封面</button><button type="button" id="save-file">保存回原文件</button><button type="button" id="save-copy">下载族谱</button></header>
+<main><div class="tools"><button id="add-member" type="button">补充成员</button><span id="sync-status" role="status"></span><button id="fit">全谱缩览</button><button id="normal">原尺寸</button><button id="trace" type="button" aria-pressed="false">亲缘追溯</button><output id="zoom-value" aria-label="缩放比例">100%</output><span class="zoom-help">Ctrl＋滚轮缩放</span></div><div class="archive-layout">
+<div class="sheet" id="sheet" tabindex="0" aria-label="横向族谱，可左右滚动"><div class="space" id="space"><div class="chart" id="chart"></div></div></div>
+<aside class="archive-panel" aria-label="族谱详情"><div id="trace-result" role="status" hidden></div><form id="editor" hidden><strong>续谱登记</strong>
+<span id="selected-member"></span><button type="button" id="close-editor">关闭登记</button><input type="hidden" id="reference">
+<label>登记方式 <select id="relation"><option value="child">添加子女</option><option value="brother">添加兄弟</option><option value="sister">添加姐妹</option><option value="grandchild">添加孙辈</option><option value="edit">修改姓名或排行</option></select></label>
+<label id="parent-field" hidden>孙辈所属子女 <select id="parent-choice"></select></label>
+<label>姓名 <input id="person-name" required maxlength="6"></label><label>成员备注 <textarea id="member-note" rows="2" maxlength="500"></textarea></label>
+<label>排行 <input id="rank" type="number" min="1" step="1" placeholder="留空则排在末尾"></label>
+<label><input id="deceased" type="checkbox"> 已故</label>
+<button type="submit">保存并下载</button><button type="button" id="delete-member">删除成员</button><button type="button" id="confirm-delete" hidden>确认删除</button><button type="button" id="cancel-delete" hidden>取消删除</button><button type="button" id="download">下载续谱网页</button>
+<p id="feedback" role="status">排行从左至右排列。</p></form>
+</aside></div></main></div>
+<script>
+const original=[["P001", "", "谢顺荣", "", "", true], ["P002", "P001", "春庆", "", ""], ["P003", "P002", "年姑", "", ""], ["P004", "P003", "名家", "", "", true], ["P005", "P003", "名江", "", ""], ["P006", "P003", "名深", "", ""], ["P007", "P003", "名宝", "", ""], ["P008", "P003", "名玉", "", ""], ["P009", "P003", "名金", "", "", true], ["P010", "P003", "粉娟", "", ""], ["P011", "P003", "婵娟", "", ""], ["P012", "P003", "杏娟", "", "", true], ["P013", "P003", "若娟", "", ""], ["P014", "P003", "瑞娟", "", ""], ["P016", "P015", "家河", "", ""], ["P017", "P015", "家贤", "", ""], ["P018", "P015", "耀娟", "", ""], ["P019", "P015", "兰娟", "", ""], ["P020", "P015", "惠娟", "", ""], ["P015", "P002", "阿元／清有", "", "", true], ["P021", "P002", "银花", "", ""], ["P022", "P021", "益利", "", ""], ["missing", "P001", "二老伯", "", "童年领养，生平不明", true], ["P023", "P001", "芝庆", "", ""], ["P024", "P023", "坤松", "", ""], ["P025", "P024", "名发", "", ""], ["P026", "P024", "名财", "", ""], ["P027", "P024", "名桐", "", ""], ["P028", "P024", "婉枝", "", ""], ["P029", "P024", "惠枝", "", ""], ["P030", "P024", "銮枝", "", ""], ["P031", "P024", "銮香", "", ""], ["P032", "P023", "阿花", "", ""], ["P033", "P032", "佑加", "", ""], ["P034", "P032", "佑生", "", ""], ["P035", "P032", "妙兰", "", ""], ["P036", "P001", "春合", "", ""], ["P037", "P036", "坤林", "", ""], ["P038", "P037", "玉梅", "大姐", "", true], ["P075", "P037", "杏梅", "二姐", "", true], ["P039", "P037", "娥妆", "", ""], ["P040", "P037", "娥貂", "", "", true], ["P041", "P037", "娥清", "", ""], ["P042", "P037", "玉貂", "", ""], ["P043", "P036", "孝林", "", ""], ["P044", "P043", "玉波", "", ""], ["P045", "P043", "玉财", "", ""], ["P046", "P043", "玉城", "", ""], ["P047", "P043", "玉妆", "", ""], ["P048", "P043", "玉粉", "", ""], ["P050", "P049", "名波", "", ""], ["P051", "P049", "维波", "", ""], ["P052", "P049", "维通", "", ""], ["P053", "P049", "粉兰", "", ""], ["P049", "P036", "发林", "", "", true], ["P054", "P036", "碧花", "", ""], ["P055", "P001", "春山", "", ""], ["P056", "P055", "有茂", "", ""], ["P057", "P056", "龙树", "", ""], ["P058", "P056", "龙波", "", ""], ["P059", "P056", "维龙", "", ""], ["P060", "P056", "如意", "", ""], ["P061", "P056", "如貂", "", ""], ["P062", "P055", "木南姑", "", ""], ["P063", "P001", "阿爱", "", ""], ["P064", "P063", "沈镇泉", "", ""], ["P065", "P064", "锡升", "", ""], ["P066", "P064", "祝升", "", ""], ["P067", "P064", "祝秋", "", ""], ["P068", "P064", "锡俊", "", ""], ["P069", "P064", "秋婵", "", ""], ["P070", "P064", "秋惜", "", ""], ["P071", "P064", "秋云", "", ""], ["P072", "P064", "祥云", "", ""], ["P073", "P001", "亚老姑", "", ""], ["P074", "P001", "小老姑", "", ""], ["bf7e3b70-4188-4f5a-bdd9-664e746e9864", "P007", "振豪", "", ""], ["99c4b494-2226-4acb-9662-9c30aed7e1d1", "P007", "振华", "", ""], ["7ab97a61-ba6e-415c-8dd8-4407f096ef17", "P007", "振复", "", ""], ["2828e28f-fd05-4cd5-962d-00c7722c149d", "bf7e3b70-4188-4f5a-bdd9-664e746e9864", "长峰", "", ""], ["fad8ad52-9c6e-466c-90d9-9cc4e7f1c038", "bf7e3b70-4188-4f5a-bdd9-664e746e9864", "瀞亿", "", "", false], ["95b95ede-978b-4d97-8928-0d9d6aa84631", "99c4b494-2226-4acb-9662-9c30aed7e1d1", "欣妤", "", "", false], ["1319fd04-2168-49fb-aa4d-2c398928df0a", "99c4b494-2226-4acb-9662-9c30aed7e1d1", "欣言", "", "", false], ["30720302-2aeb-4b33-a4c4-cc13eac3b096", "P041", "舜端", "", "", false], ["6fdb127c-28e4-4b02-a88c-62664a57c5e4", "P041", "舜根", "", "", false], ["b57511a5-2c8a-4ed2-9368-169c59c590d0", "P041", "舜莹", "", "", false], ["2ececf84-683f-4bfe-81b7-d015d336e759", "30720302-2aeb-4b33-a4c4-cc13eac3b096", "庆生", "", "", false], ["efe907f6-2c79-4809-af57-429a257f26b9", "30720302-2aeb-4b33-a4c4-cc13eac3b096", "博杭", "", "", false], ["66e296f8-ab26-49ec-ad08-f0da022a9549", "6fdb127c-28e4-4b02-a88c-62664a57c5e4", "炼杰", "", "", false], ["f863c379-3bb4-46c8-ad9d-2d382eb23226", "6fdb127c-28e4-4b02-a88c-62664a57c5e4", "练达", "", "", false], ["c8380c39-a922-4b9f-921b-f8bf8d9a416b", "b57511a5-2c8a-4ed2-9368-169c59c590d0", "自航", "", "", false]];
+const legacyKey='xie-genealogy-edit:'+JSON.stringify(original);
+const storageKey='xie-genealogy-master-142354';
+let rows=original;
+try{
+ const saved=localStorage.getItem(storageKey);
+ if(saved)rows=JSON.parse(saved);
+}catch{}
+const unusedPlaceholders=new Set();
+for(const [id,name] of [['author','本人'],['father','父亲']]){
+ const row=rows.find(r=>r[0]===id);
+ if(row?.[2]===name&&row[3]==='姓名待补录'&&!rows.some(r=>r[1]===id&&!unusedPlaceholders.has(r[0])))unusedPlaceholders.add(id);
+}
+rows=rows.filter(r=>!unusedPlaceholders.has(r[0]));
+const sourceBoxes=new Set(['P001','P002','P003','P008','P010','P015','P018','P021','P023','P024','P032','P036','P037','P043','P055','P056','P063','P064']);
+const isDeceased=row=>row[5]??sourceBoxes.has(row[0]);
+ 
+const chart=document.getElementById('chart'),space=document.getElementById('space'),sheet=document.getElementById('sheet');
+let records, root, width, height;
+const focusPath=new Set(['P001','P002','P003','P007','P036','P037','P041']);
+const focusRoots=new Set(['P007','P041']);
+const expanded=new Set(),collapsed=new Set();
+function draw(){
+chart.replaceChildren();
+const deceased=new Set(rows.filter(isDeceased).map(r=>r[0]));
+records=new Map(rows.map(([id,parent,name,label,note])=>[id,{id,parent,name,label,note,kids:[]}]));
+for(const node of records.values())if(node.parent)records.get(node.parent).kids.push(node);
+root=records.get('P001');
+const visible=new Set();
+function filter(node,full=false,depth=0){
+ visible.add(node.id);
+ const all=!collapsed.has(node.id)&&(full||expanded.has(node.id)||focusRoots.has(node.id));
+ node.kids=node.kids.filter(child=>all||(!collapsed.has(node.id)&&(depth<2||node.id==="P003"||node.id==="P037"||focusPath.has(child.id)||traceNodes.has(child.id))));
+ for(const child of node.kids)filter(child,all,depth+1);
+}
+filter(root);
+for(const id of records.keys())if(!visible.has(id))records.delete(id);
+const pitch=43,gap=22;
+function layout(node,depth,left){
+ node.y=28+depth*145;
+ const noteWidth=node.note||node.label&&node.label!=="姓名待补录"?24:0;
+ let right=left;
+ for(const child of node.kids){
+  layout(child,depth+1,right);
+  right+=child.width+gap;
+ }
+ node.width=Math.max(pitch+noteWidth,node.kids.length?right-left-gap:0);
+ node.x=node.kids.length?(node.kids[0].x+node.kids.at(-1).x)/2:left+pitch/2;
+ node.height=depth===0?41:Math.max(53,[...node.name].length*20+10);
+}
+layout(root,0,76);
+for(let y=28,depth=1;y<=Math.max(...[...records.values()].map(n=>n.y));y+=145,depth++){
+ const label=document.createElement("span");
+ label.className="generation";label.style.top=(y+12)+"px";label.textContent="第"+depth+"代";chart.append(label);
+}
+width=root.width+68;height=Math.max(...[...records.values()].map(n=>n.y+n.height))+32;
+function wire(x,y,w,h){
+ const line=document.createElement('i');line.className='wire';
+ Object.assign(line.style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px'});
+ chart.append(line);
+}
+for(const n of records.values())if(n.kids.length){
+ const y=n.y+136, x1=Math.min(n.x,n.kids[0].x),x2=Math.max(n.x,n.kids.at(-1).x);
+ wire(n.x,n.y+n.height,1,y-n.y-n.height+1);
+ wire(x1,y,x2-x1+1,1);
+ for(const child of n.kids)wire(child.x,y,1,child.y-y+1);
+}
+for(const n of records.values()){
+ const element=document.createElement('span');
+ element.className='person'+(deceased.has(n.id)?' boxed':'')+(n===root?' root':'')+(traceNodes.has(n.id)?' traced':'');
+ element.textContent=n===root?'曾祖 '+n.name:n.name;
+ element.title=[n.name,n.note].filter(Boolean).join('。');
+ Object.assign(element.style,{left:n.x+'px',top:n.y+'px',height:n.height+'px'});
+ element.tabIndex=0; element.setAttribute('role','button');
+ element.onclick=()=>choosePerson(n.id);
+ element.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choosePerson(n.id);}};
+ chart.append(element);
+ const count=children(n.id).length;
+ if(count){
+  const toggle=document.createElement('button');
+  const reveal=n.kids.length<count&&!expanded.has(n.id);
+  toggle.type='button';toggle.className='branch-toggle';toggle.textContent=reveal?'展开':'收起';
+  toggle.setAttribute('aria-label',toggle.textContent+n.name+'支系');
+  Object.assign(toggle.style,{left:n.x+'px',top:(n.y+n.height+4)+'px'});
+  toggle.onclick=()=>{
+   if(reveal){expanded.add(n.id);collapsed.delete(n.id);}
+   else{expanded.delete(n.id);collapsed.add(n.id);}
+   draw();if(fit)fitChart();else go(n.id);
+  };
+  chart.append(toggle);
+ }
+ const note=n.note||"";
+ if(note){
+  const mark=document.createElement("button");
+  mark.type="button";mark.className="member-note";mark.textContent=note;mark.title=note;
+  mark.setAttribute("aria-label",n.name+"的备注："+note);
+  Object.assign(mark.style,{left:n.x+(n===root?77:18)+"px",top:n.y+"px"});
+  mark.onclick=()=>{relation.value="edit";selectMember(n.id);get("member-note").focus();};
+  chart.append(mark);
+ }
+}
+ drawTrace();
+}
+let zoom=1,fit=false;
+function size(value){
+ zoom=value;document.getElementById('zoom-value').value=Math.round(zoom*100)+'%';chart.style.transform='scale('+zoom+')';
+ space.style.width=width*zoom+'px';space.style.height=height*zoom+'px';
+}
+function go(id){
+ fit=false;size(1);const node=records.get(id);
+ sheet.scrollLeft=node.x-sheet.clientWidth/2;
+}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+function fitChart(){size(Math.min(1,(sheet.clientWidth-2)/width));sheet.scrollLeft=0;}
+document.getElementById('fit').onclick=()=>{fit=true;fitChart()};
+document.getElementById('normal').onclick=()=>go('P001');
+window.addEventListener('resize',()=>{if(fit)fitChart()});
+let pinch=null;
+function pinchPoint(event){
+ const [a,b]=event.touches;
+ const bounds=sheet.getBoundingClientRect();
+ return [Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY),
+  (a.clientX+b.clientX)/2-bounds.left-sheet.clientLeft,
+  (a.clientY+b.clientY)/2-bounds.top-sheet.clientTop];
+}
+sheet.addEventListener('touchstart',event=>{
+ if(event.touches.length!==2)return;
+ event.preventDefault();
+ pinch=pinchPoint(event)[0];
+},{passive:false});
+sheet.addEventListener('touchmove',event=>{
+ if(event.touches.length!==2||!pinch)return;
+ event.preventDefault();
+ const [distance,x,y]=pinchPoint(event);
+ zoomAt(Math.min(3,Math.max(Math.min(.15,(sheet.clientWidth-2)/width),zoom*distance/pinch)),x,y);
+ pinch=distance;
+},{passive:false});
+for(const type of ['touchend','touchcancel'])sheet.addEventListener(type,()=>{pinch=null;});
+function zoomAt(next,x,y){
+ const previous=zoom;
+ const left=(sheet.scrollLeft+x)/previous,top=(sheet.scrollTop+y)/previous;
+ fit=false;
+ size(next);
+ sheet.scrollLeft=left*next-x;
+ sheet.scrollTop=top*next-y;
+}
+sheet.addEventListener('wheel',event=>{
+ if(!event.ctrlKey)return;
+ event.preventDefault();
+ const bounds=sheet.getBoundingClientRect();
+ const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?sheet.clientHeight:1);
+ const minimum=Math.min(0.15,(sheet.clientWidth-2)/width);
+ const next=Math.min(3,Math.max(minimum,zoom*Math.exp(-delta*0.002)));
+ if(next!==zoom)zoomAt(next,event.clientX-bounds.left-sheet.clientLeft,event.clientY-bounds.top-sheet.clientTop);
+},{passive:false});
+
+const get=id=>document.getElementById(id);
+const reference=get('reference'),relation=get('relation'),choice=get('parent-choice'),rank=get('rank'),input=get('person-name'),feedback=get('feedback');
+const children=id=>rows.filter(r=>r[1]===id);
+const current=()=>rows.find(r=>r[0]===reference.value);
+function options(select,items){
+ select.replaceChildren(...items.map(r=>new Option(r[2],r[0])));
+}
+function refresh(){
+ const node=current(),mode=relation.value;
+ get('parent-field').hidden=mode!=='grandchild';
+ options(choice,children(node[0]));
+ input.value=mode==='edit'?node[2]:'';
+ get('member-note').value=mode==='edit'?node[4]||'':'';
+ get('deceased').checked=mode==='edit'&&isDeceased(node);
+ rank.value=mode==='edit'&&node[1]?children(node[1]).indexOf(node)+1:'';
+}
+function rebuild(id){
+ draw();selectMember(id);go(records.has(id)?id:rows[0][0]);
+}
+function selectMember(id){
+ cancelDelete();
+ reference.value=id;
+ syncStatus.textContent='';
+ get('selected-member').textContent='当前成员：'+current()[2];
+ get('editor').hidden=false;
+ refresh();
+}
+get('close-editor').onclick=()=>{get('editor').hidden=true;};
+relation.onchange=refresh;
+get('editor').onsubmit=event=>{
+ event.preventDefault();
+ if(saving)return;
+ const node=current(),mode=relation.value,value=input.value.trim();
+ if(!value){feedback.textContent='请输入姓名。';return;}
+ const parent=mode==='child'?node[0]:mode==='grandchild'?choice.value:node[1];
+ if(!parent&&mode!=='edit'){feedback.textContent=mode==='grandchild'?'请先登记并选择该孙辈的上一代。':'该成员的上一代未列于本谱。';return;}
+ const next=rows.map(r=>r.slice());
+ const id=mode==='edit'?node[0]:globalThis.crypto?.randomUUID?.()||'n'+Date.now()+'-'+Math.random().toString(36).slice(2);
+ const updated=[id,parent,value,mode==='edit'&&node[3]!=='姓名待补录'?node[3]:'',get('member-note').value.trim(),get('deceased').checked];
+ if(mode==='edit'&&!parent){next[0]=updated;}
+ else{
+  if(mode==='edit')next.splice(next.findIndex(r=>r[0]===id),1);
+  const siblings=next.filter(r=>r[1]===parent);
+  const before=rank.value?siblings[Number(rank.value)-1]:undefined;
+  next.splice(before?next.indexOf(before):siblings.length?next.indexOf(siblings.at(-1))+1:next.length,0,updated);
+ }
+ for(let ancestor=parent;ancestor;ancestor=next.find(r=>r[0]===ancestor)?.[1]){
+  collapsed.delete(ancestor);
+  if(ancestor===parent)expanded.add(ancestor);
+ }
+ rows=next;
+ save(id);
+};
+let onlineVersion=null;
+let saving=false;
+const online=false;
+async function loadOnline(){
+ if(!online)return;
+ const response=await fetch('/api/genealogy',{cache:'no-store'});
+ if(!response.ok)throw Error('load');
+ const data=await response.json();
+ onlineVersion=data.version;
+ rows=data.rows;
+}
+async function save(id){
+ if(online){
+  if(saving)return;
+  saving=true;
+  try{
+   const response=await fetch('/api/genealogy',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({rows,version:onlineVersion})});
+   if(!response.ok)throw Error(response.status===409?'conflict':'write');
+   onlineVersion=(await response.json()).version;
+   rebuild(id);feedback.textContent='已保存至在线族谱。';
+  }catch(error){
+   feedback.textContent=error.message==='conflict'?'在线族谱已有更新。本次修改已下载为存档，请重新打开网页后核对。':'在线保存失败。本次修改已下载为存档。';
+   download();
+  }finally{saving=false;}
+  return;
+ }
+ let saved=true;
+ try{localStorage.setItem(storageKey,JSON.stringify(rows));}catch{saved=false;}
+ rebuild(id);
+ feedback.textContent=saved?'已保存至当前浏览器，并已发起族谱文件下载。':'已发起族谱文件下载。请保留下载的文件。';
+ if(typeof Blob!=='undefined')download();
+}
+let pendingDelete=null;
+function cancelDelete(){
+ pendingDelete=null;
+ get('confirm-delete').hidden=true;
+ get('cancel-delete').hidden=true;
+}
+get('cancel-delete').onclick=()=>{cancelDelete();feedback.textContent='已取消删除。';};
+get('delete-member').onclick=()=>{
+ const node=current();
+ if(!node[1]){feedback.textContent='曾祖是全谱起点，无法删除。';return;}
+ if(children(node[0]).length){feedback.textContent='该成员名下已有后代。若姓名有误，请使用「修改姓名或排行」。';return;}
+ pendingDelete=node[0];
+ get('confirm-delete').hidden=false;
+ get('cancel-delete').hidden=false;
+ feedback.textContent='确认删除「'+node[2]+'」？';
+};
+get('confirm-delete').onclick=()=>{
+ if(saving)return;
+ const node=current();
+ if(node[0]!==pendingDelete||children(node[0]).length)return;
+ cancelDelete();
+ rows=rows.filter(row=>row[0]!==node[0]);
+ save(node[1]);
+};
+function snapshotHTML(keepKey=false){
+ const snapshot=document.documentElement.cloneNode(true);
+ snapshot.setAttribute('data-offline','');
+ snapshot.querySelector('#chart').replaceChildren();
+ snapshot.querySelector('#book-entry').hidden=false;
+ snapshot.querySelector('#reading').hidden=true;
+ snapshot.querySelector('#reading').classList.remove('arrive');
+ snapshot.querySelector('#editor').hidden=true;
+ snapshot.querySelector('#trace-result').hidden=true;
+ snapshot.querySelector('#trace').textContent='亲缘追溯';
+ snapshot.querySelector('#trace').setAttribute('aria-pressed','false');
+ snapshot.querySelector('#confirm-delete').hidden=true;
+ snapshot.querySelector('#cancel-delete').hidden=true;
+ const script=snapshot.querySelector('script');
+ const end=script.textContent.indexOf('\nconst legacyKey');
+ script.textContent='\nconst original='+JSON.stringify(rows).replaceAll('<','\\u003c')+';'+script.textContent.slice(end);
+ if(!keepKey)script.textContent=script.textContent.replace(/const storageKey=[^;]+;/,"const storageKey='xie-genealogy-archive-"+Date.now()+"';");
+ return '<!doctype html>'+snapshot.outerHTML;
+}
+function download(){
+ const url=URL.createObjectURL(new Blob([snapshotHTML()],{type:'text/html;charset=utf-8'}));
+ const a=document.createElement('a');a.href=url;a.download='谢氏族谱-续谱存档.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+get('download').onclick=download;
+const syncStatus=get('sync-status');
+get('add-member').onclick=()=>{
+ syncStatus.textContent='请选择谱图中的成员，再选择登记关系。';
+ sheet.focus();
+};
+get('save-copy').onclick=download;
+let targetFile;
+get('save-file').onclick=async()=>{
+ if(!window.showSaveFilePicker){
+  download();syncStatus.textContent='已下载最新族谱。可用此文件替换原文件。';return;
+ }
+ try{
+  if(!targetFile)targetFile=await window.showSaveFilePicker({suggestedName:'谢氏族谱.html',types:[{description:'族谱网页',accept:{'text/html':['.html']}}]});
+  const writer=await targetFile.createWritable();
+  await writer.write(snapshotHTML(true));
+  await writer.close();
+  syncStatus.textContent='已写入 '+targetFile.name+'。';
+ }catch(error){
+  if(error.name==='AbortError')return;
+  targetFile=null;
+  download();syncStatus.textContent='原文件写入失败，已下载最新族谱。';
+ }
+};
+let tracing=false,pair=[],traceEdges=[],traceNodes=new Set();
+const traceButton=document.getElementById('trace'),traceResult=document.getElementById('trace-result');
+function ancestry(id){
+ const path=[];
+ for(let row=rows.find(r=>r[0]===id);row;row=rows.find(r=>r[0]===row[1]))path.push(row[0]);
+ return path;
+}
+function relationship(a,b,older){
+ if(!a)return ['本人','子女','孙辈','曾孙辈','玄孙辈'][b]||'第'+b+'代后裔';
+ if(!b)return ['本人','父亲或母亲','祖父母或外祖父母','曾祖辈','高祖辈'][a]||'上溯'+a+'代的直系长辈';
+ if(a===1&&b===1)return older?'哥哥或姐姐':'弟弟或妹妹';
+ if(a===b){
+  if(a===2)return '堂或表'+(older?'兄／姐':'弟／妹');
+  return '同辈远亲（共祖上溯'+a+'代）';
+ }
+ if(a===2&&b===1)return '伯父、叔父、姑母、舅父或姨母';
+ if(a===1&&b===2)return '侄辈或外甥辈';
+ return '旁系'+(a>b?'长辈':'晚辈')+'（相差'+Math.abs(a-b)+'代）';
+}
+function redrawTrace(){
+ draw();fitChart();
+}
+function choosePerson(id){
+ if(!tracing){selectMember(id);return;}
+ if(pair.length===2)pair=[];
+ if(pair.includes(id))return;
+ pair.push(id);
+ traceEdges=[];traceNodes=new Set(pair);
+ const name=id=>rows.find(r=>r[0]===id)[2];
+ if(pair.length===1){traceResult.textContent='已选 '+name(id)+'，请选择另一位成员。';redrawTrace();return;}
+ const [a,b]=pair.map(ancestry);
+ const common=a.find(id=>b.includes(id));
+ const up=a.indexOf(common),down=b.indexOf(common);
+ for(const path of [a.slice(0,up+1),b.slice(0,down+1)]){
+  for(const id of path){traceNodes.add(id);collapsed.delete(id);}
+ }
+ const route=[...a.slice(0,up+1),...b.slice(0,down).reverse()];
+ traceEdges=route.slice(1).map((id,i)=>[route[i],id]);
+ const order=parent=>rows.filter(r=>r[1]===parent).map(r=>r[0]);
+ const older=up&&down&&order(common).indexOf(b[down-1])<order(common).indexOf(a[up-1]);
+ const [first,second]=pair.map(name);
+ traceResult.replaceChildren();
+ for(const [tag,text] of [['strong','亲缘追溯'],['p','共同祖先：'+name(common)],['p',first+'称'+second+'：'+relationship(up,down,older)],['p',second+'称'+first+'：'+relationship(down,up,!older)],['p','称谓依谱系推算，具体用法受性别、亲系及家族习惯影响。']]){
+  const entry=document.createElement(tag);entry.textContent=text;traceResult.append(entry);
+ }
+ redrawTrace();
+}
+traceButton.onclick=()=>{
+ tracing=!tracing;pair=[];traceNodes=new Set();traceEdges=[];
+ traceButton.setAttribute('aria-pressed',String(tracing));
+ traceButton.textContent=tracing?'结束追溯':'亲缘追溯';
+ traceResult.hidden=!tracing;traceResult.textContent=tracing?'请在谱图上依次选择两位成员。':'';
+ if(tracing)document.getElementById('editor').hidden=true;
+ redrawTrace();
+};
+function drawTrace(){
+ if(!traceEdges.length)return;
+ const ns='http://www.w3.org/2000/svg';
+ const svg=document.createElementNS(ns,'svg');
+ svg.setAttribute('width',width);svg.setAttribute('height',height);
+ svg.setAttribute('class','trace-overlay');svg.setAttribute('aria-hidden','true');
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ for(const [from,to] of traceEdges){
+  const a=records.get(from),b=records.get(to);
+  if(!a||!b)continue;
+  const down=b.parent===a.id,parent=down?a:b,child=down?b:a,y=parent.y+136;
+  const points=[[parent.x,parent.y+parent.height],[parent.x,y],[child.x,y],[child.x,child.y]];
+  if(!down)points.reverse();
+  const path='M '+points.map(p=>p.join(' ')).join(' L ');
+  const length=points.slice(1).reduce((sum,[x,y],i)=>sum+Math.hypot(x-points[i][0],y-points[i][1]),0);
+  const trail=document.createElementNS(ns,'path');
+  trail.setAttribute('d',path);trail.setAttribute('class','particle-guide');svg.append(trail);
+  if(reduced||!length)continue;
+  const duration=length/135,count=Math.max(2,Math.ceil(length/22));
+  for(let i=0;i<count;i++){
+   const dot=document.createElementNS(ns,'circle');
+   dot.setAttribute('r',i%3===0?'4.2':'2.8');
+   dot.setAttribute('class',i%3===0?'trace-particle bright':'trace-particle');
+   const motion=document.createElementNS(ns,'animateMotion');
+   motion.setAttribute('path',path);motion.setAttribute('calcMode','paced');
+   motion.setAttribute('dur',duration+'s');motion.setAttribute('begin',(-duration*i/count)+'s');
+   motion.setAttribute('repeatCount','indefinite');
+   dot.append(motion);svg.append(dot);
+  }
+ }
+ chart.append(svg);
+}
+
+const entry=get('book-entry'),reading=get('reading'),openBook=get('open-book');
+let opening=false;
+openBook.onclick=async()=>{
+ if(opening)return;
+ opening=true;
+ try{await loadOnline();}
+ catch{opening=false;openBook.querySelector('.entry-label').textContent='读取失败，点击重试';return;}
+ entry.classList.add('opening');
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ window.setTimeout(()=>{
+  entry.hidden=true;entry.classList.remove('opening');reading.hidden=false;reading.classList.add('arrive');
+  draw();fitChart();
+  for(const item of chart.querySelectorAll('.person,.wire,.generation')){
+   const tier=Math.max(0,Math.floor((parseFloat(item.style.top)||0)/145));
+   item.style.setProperty('--tier',Math.min(tier,8));
+  }
+  chart.classList.add('ink-in');
+  window.setTimeout(()=>chart.classList.remove('ink-in'),1500);
+  sheet.focus({preventScroll:true});opening=false;
+ },reduced?0:920);
+};
+get('return-cover').onclick=()=>{reading.hidden=true;reading.classList.remove('arrive');entry.hidden=false;openBook.focus();};
+</script></html>
